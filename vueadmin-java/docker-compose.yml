@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7.27
+    ports:
+      - 3306:3306
+    environment: # 指定用户root的密码
+      - MYSQL_ROOT_PASSWORD=admin
+  redis:
+    image: redis:latest
+  vueadmin:
+    image: vueadmin:latest
+    build: . # 表示以当前目录下的Dockerfile开始构建镜像
+    ports:
+      - 8085:8081
+    depends_on:
+      - mysql
+      - redis
